@@ -1,0 +1,15 @@
+{
+  "name": "hisa-backend",
+  "version": "1.0.0",
+  "description": "Backend API para o projeto Hisa",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "firebase-admin": "^12.7.0"
+  }
+}
