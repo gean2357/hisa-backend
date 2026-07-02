@@ -4,7 +4,19 @@ const admin = require('firebase-admin');
 const path = require('path');
 
 // Inicializa o Firebase Admin SDK
-const serviceAccount = require('./serviceAccountKey.json');
+let serviceAccount;
+try {
+  // Tenta ler a variável de ambiente (no Render)
+  if (process.env.FIREBASE_CREDENTIALS) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS);
+  } else {
+    // Se não tiver variável, tenta ler o arquivo local
+    serviceAccount = require('./serviceAccountKey.json'); // ou o nome que você deixou
+  }
+} catch (err) {
+  console.error("Erro ao carregar as credenciais do Firebase:", err);
+  process.exit(1);
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
