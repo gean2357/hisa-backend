@@ -168,9 +168,14 @@ app.delete('/api/products/:id', async (req, res) => {
   }
 });
 
-// Fallback para SPA (Single Page Application) ou rotas normais
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Fallback para rota principal
+app.get('/', (req, res) => {
+  res.json({ message: 'API Hisa Backend funcionando perfeitamente!' });
+});
+
+// Fallback para rotas não encontradas
+app.use((req, res) => {
+  res.status(404).json({ error: 'Rota da API não encontrada' });
 });
 
 const PORT = process.env.PORT || 3000;
